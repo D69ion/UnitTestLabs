@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BaseCalculator;
 
 namespace UnitTestLab3
 {
@@ -9,6 +10,8 @@ namespace UnitTestLab3
         [TestMethod]
         public void TestMethod1()
         {
+            
         }
+
     }
 }
