@@ -16,7 +16,7 @@ namespace UnitTestLab3.AnalaizerClassTests
         {
             AnalaizerClass.expression = input;
             bool result = AnalaizerClass.CheckCurrency();
-            Log.CreateLog(logger, "CalcClass.Abs", testNumber, input, expected.ToString(), result.ToString());
+            Log.CreateLog(logger, component, testNumber, input, expected.ToString(), result.ToString());
             Assert.AreEqual(result, expected);
         }
 
