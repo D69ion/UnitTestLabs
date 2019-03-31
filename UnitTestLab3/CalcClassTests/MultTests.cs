@@ -24,7 +24,7 @@ namespace UnitTestLab3.CalcClassTests
         {
             long result = CalcClass.Mult(a, b);
             string exep = CalcClass.lastError;
-            if (result == 0 && exep.Equals(exeption))
+            if (result == 0 && exep.Contains(exeption))
             {
                 Log.CreateLog(logger, component, testNumber, a.ToString(), "0 " + exeption, result.ToString() + " " + exep);
                 Assert.AreEqual(result, 0);
@@ -66,20 +66,13 @@ namespace UnitTestLab3.CalcClassTests
         [TestMethod]
         public void Test4()
         {
-            NegativeMultTest(4, (long)int.MaxValue, (long)int.MaxValue, "Error 06");
+            NegativeMultTest(4, (long)int.MinValue - 5, (long)int.MinValue - 5, "Error 06");
         }
 
         [TestMethod]
         public void Test5()
         {
-            NegativeMultTest(5, int.MaxValue, int.MaxValue, "Error 06");
+            NegativeMultTest(5, (long)int.MaxValue + 5, (long)int.MaxValue + 5, "Error 06");
         }
-
-        [TestMethod]
-        public void Test6()
-        {
-            NegativeMultTest(6, int.MinValue, int.MinValue, "Error 06");
-        }
-
     }
 }

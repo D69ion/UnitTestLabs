@@ -2,54 +2,71 @@
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BaseCalculator;
+using NLog;
+using NLog.Targets;
+using NLog.Config;
 
 namespace UnitTestLab3.AnalaizerClassTests
 {
     [TestClass]
     public class FormatTests
     {
-        private void FormatTest(string input, string expected)
+        private static Logger logger = CreateLogger();
+        private const string component = "AnalaizerClass.Format";
+        private void FormatTest(int testNumber, string input, string expected)
         {
             AnalaizerClass.expression = input;
             string result = AnalaizerClass.Format();
-            if (input.Contains(expected))
+            if (result.Contains(expected))
             {
+                Log.CreateLog(logger, component, testNumber, input, expected, result);
                 Assert.AreEqual(true, true);
             }
             else
             {
-                Assert.AreEqual(false, false);
+                Log.CreateBugReport(logger, component, testNumber, input, expected, result, "");
+                Assert.AreEqual(false, true);
             }
+        }
+
+        private static Logger CreateLogger()
+        {
+            LoggingConfiguration configuration = new LoggingConfiguration();
+            FileTarget fileTarget = new FileTarget("log") { FileName = Log.LogPath };
+            //fileTarget.DeleteOldFileOnStartup = true;
+            configuration.AddRule(LogLevel.Info, LogLevel.Fatal, fileTarget);
+            LogManager.Configuration = configuration;
+            return LogManager.GetCurrentClassLogger();
         }
 
         [TestMethod]
         public void Test1()
         {
-            FormatTest("1+1", "1 + 1 ");
+            FormatTest(1, "1+1", "1 + 1 ");
         }
 
         [TestMethod]
         public void Test2()
         {
-            FormatTest("1   +  1 ", "1 + 1 ");
+            FormatTest(2, "1   +  1 ", "1 + 1 ");
         }
 
         [TestMethod]
         public void Test3()
         {
-            FormatTest("1+", "Error 05");
+            FormatTest(3, "1+", "Error 05");
         }
 
         [TestMethod]
         public void Test4()
         {
-            FormatTest("1++1", "Error 04");
+            FormatTest(4, "1++1", "Error 04");
         }
 
         [TestMethod]
         public void Test5()
         {
-            FormatTest("!1", "Error 02");
+            FormatTest(5, "!1", "Error 02");
         }
 
         [TestMethod]
@@ -61,7 +78,7 @@ namespace UnitTestLab3.AnalaizerClassTests
                 str.Append('1');
             }
             str.Append("+1");
-            FormatTest(str.ToString(), "Error 07");
+            FormatTest(6, str.ToString(), "Error 07");
         }
 
     }

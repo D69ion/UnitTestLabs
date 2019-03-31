@@ -25,7 +25,7 @@ namespace UnitTestLab3.CalcClassTests
         {
             long result = CalcClass.ABS(a);
             string exep = CalcClass.lastError;
-            if (result == 0 && exep.Equals(exeption))
+            if (result == 0 && exep.Contains(exeption))
             {
                 Log.CreateLog(logger, component, testNumber, a.ToString(), "0 " + exeption, result.ToString() + " " + exep);
                 Assert.AreEqual(result, 0);

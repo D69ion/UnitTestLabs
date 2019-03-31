@@ -23,7 +23,7 @@ namespace UnitTestLab3
         {
             StringBuilder @string = new StringBuilder();
             @string.Append(component + " Тест №" + testNumber + "\r\n").Append("Входные данные: " + input + "\r\n").Append("Ожидаемый результат: " + expected + "\r\n").Append("Полученный результат: " + result + "\r\n")
-                .Append("Ошибка: " + exeption + "\r\n").Append("Описание: \r\n").Append("Проект: BaseCalculator\r\n").Append("Номер версии: 1.0.0\r\nКомпонент: " + component).Append("Серьезность: \r\nПриоритет: \r\n\r\n");
+                .Append("Ошибка: " + exeption + "\r\n").Append("Описание: \r\n").Append("Проект: BaseCalculator\r\n").Append("Номер версии: 1.0.0\r\nКомпонент: " + component + "\r\n").Append("Серьезность: \r\nПриоритет: \r\n\r\n");
             logger.Info(@string.ToString());
         }
     }
